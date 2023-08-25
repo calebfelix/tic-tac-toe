@@ -2,11 +2,15 @@ const Board = require("./Board");
 const Player = require("./Player");
 
 class Game {
+  #players
+  #board
+  #turn
+  #endGame
   constructor(player1, player2) {
-    this.players = [new Player(player1, "X"), new Player(player2, "O")];
-    this.board = new Board();
-    this.turn = 0;
-    this.endGame = false;
+    this.#players = [new Player(player1, "X"), new Player(player2, "O")];
+    this.#board = new Board();
+    this.#turn = 0;
+    this.#endGame = false;
   }
 
   static newGame(player1Name, player2Name) {
@@ -29,34 +33,34 @@ class Game {
     if (cellNumber > 8 || cellNumber < 0) {
       return "invalid cell Number";
     }
-    if (this.endGame) {
+    if (this.#endGame) {
       return "------------ Game Over!!! ------------";
     }
-    if (!this.board.cells[cellNumber].isEmpty()) {
+    if (!this.#board.getCell(cellNumber).isEmpty()) {
       return "cell Already Filled";
     }
 
     // current player detection
-    let currentPlayer = this.players[this.turn % 2];
-    this.turn++;
+    let currentPlayer = this.#players[this.#turn % 2];
+    this.#turn++;
 
     // change symbol
-    this.board.getCell(cellNumber).mark = currentPlayer.getPlayerSymbol();
+    this.#board.getCell(cellNumber).mark = currentPlayer.getPlayerSymbol();
 
     // print board
-    console.log(this.board.printBoard());
+    console.log(this.#board.printBoard());
 
     // Analyse board
-    let [status, winner] = this.board.analyseBoard();
+    let [status, winner] = this.#board.analyseBoard();
     if (status === "" && winner === "") {
       return "continue game...";
     }
     if (status === "draw") {
-      this.endGame = true;
+      this.#endGame = true;
       return "It's a Draw!!!";
     }
     if (status === "win") {
-      this.endGame = true;
+      this.#endGame = true;
       return `${winner} is the Winner!!!`;
     }
   }
