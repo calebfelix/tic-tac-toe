@@ -22,6 +22,10 @@ class Board {
     return this.cells[cellNumber];
   }
 
+  markCell(cellNumber, playerSymbol){
+    this.getCell(cellNumber).markCellSymbol(playerSymbol)
+  }
+
   isDraw(){
     for (let index = 0; index < this.cells.length; index++) {
       if(this.cells[index].isEmpty()){

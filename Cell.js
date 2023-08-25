@@ -13,6 +13,9 @@ class Cell {
     getMark(){
       return this.mark
     }
+    markCellSymbol(playerSymbol){
+      this.mark = playerSymbol
+    }
   }
 
 

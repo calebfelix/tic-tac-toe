@@ -45,7 +45,7 @@ class Game {
     this.#turn++;
 
     // change symbol
-    this.#board.getCell(cellNumber).mark = currentPlayer.getPlayerSymbol();
+    this.#board.markCell(cellNumber, currentPlayer.getPlayerSymbol())
 
     // print board
     console.log(this.#board.printBoard());
@@ -61,7 +61,11 @@ class Game {
     }
     if (status === "win") {
       this.#endGame = true;
-      return `${winner} is the Winner!!!`;
+      if(winner === 'X'){
+        return `congrats, ${winner} wins!!! ${this.#players[0].getPlayerName()} is the Winner!!!`;
+      }else{
+        return `congrats, ${winner} wins!!! ${this.#players[1].getPlayerName()} is the Winner!!!`;
+      }
     }
   }
 }
