@@ -11,11 +11,15 @@ class Game {
 
   static newGame(player1Name, player2Name) {
     // validate
-    if (typeof player2Name === "string" && typeof player1Name === "string") {
-      let newGame = new Game(player1Name, player2Name);
-      return [newGame, "Game Created"];
+    if (
+      typeof player2Name !== "string" ||
+      typeof player1Name !== "string" ||
+      player1Name === player2Name
+    ) {
+      return [null, ""];
     }
-    return [null, ""]
+    let newGame = new Game(player1Name, player2Name);
+    return [newGame, "Game Created"];
   }
 
   play(cellNumber) {
@@ -37,7 +41,7 @@ class Game {
     this.turn++;
 
     // change symbol
-    this.board.getCell(cellNumber).mark = currentPlayer.PlayerSymbol;
+    this.board.getCell(cellNumber).mark = currentPlayer.getPlayerSymbol();
 
     // print board
     console.log(this.board.printBoard());

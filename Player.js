@@ -1,9 +1,16 @@
 class Player {
-  constructor(PlayerName, PlayerSymbol) {
-    this.PlayerName = PlayerName    
-    this.PlayerSymbol = PlayerSymbol    
+  constructor(playerName, playerSymbol) {
+    this.playerName = playerName    
+    this.playerSymbol = playerSymbol    
   }
 
+  getPlayerName(){
+    return this.playerName
+  }
+
+  getPlayerSymbol(){
+    return this.playerSymbol
+  }
 }
 
 module.exports = Player;
