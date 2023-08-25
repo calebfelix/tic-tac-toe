@@ -22,6 +22,15 @@ class Board {
     return this.cells[cellNumber];
   }
 
+  isDraw(){
+    for (let index = 0; index < this.cells.length; index++) {
+      if(this.cells[index].isEmpty()){
+        return false
+      }
+    }
+    return true
+  }
+
   analyseBoard() {
     if (
       this.cells[0].getMark() == this.cells[1].getMark() &&
@@ -71,14 +80,8 @@ class Board {
       !this.cells[6].isEmpty()) {
         return ["win", this.cells[6].getMark()]
     }
-    let isDraw = true
-    for (let index = 0; index < this.cells.length; index++) {
-      if(this.cells[index].isEmpty()){
-        isDraw = false
-        break
-      }
-    }
-    if(isDraw){
+
+    if(this.isDraw()){
       return["draw", ""]
     }
     return["", ""]
